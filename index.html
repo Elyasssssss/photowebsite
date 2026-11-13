@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Send Feedback</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 36rem;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    label, textarea, button {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      margin: 0.5rem 0 1rem;
+      min-height: 8rem;
+      padding: 0.75rem;
+      font: inherit;
+    }
+
+    button {
+      padding: 0.75rem;
+      font: inherit;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>We'd love your feedback</h1>
+  <form id="feedback-form">
+    <label for="feedback">Your feedback</label>
+    <textarea id="feedback" name="feedback" required placeholder="Tell us what you think..."></textarea>
+    <button type="submit">Send feedback</button>
+  </form>
+
+  <script>
+    // Replace this with the email address that should receive feedback.
+    const feedbackEmail = "feedback@example.com";
+
+    document.getElementById("feedback-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const message = document.getElementById("feedback").value.trim();
+      if (!message) return;
+
+      const subject = encodeURIComponent("Website feedback");
+      const body = encodeURIComponent(message);
+      window.location.href = `mailto:${feedbackEmail}?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
