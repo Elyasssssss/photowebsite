@@ -1,58 +1,547 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Send Feedback</title>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      max-width: 36rem;
-      margin: 3rem auto;
-      padding: 0 1rem;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Elyas — Street and documentary photographer. Exploring everyday life through photography.">
+<title>Elyas — Photography</title>
 
-    label, textarea, button {
-      display: block;
-      width: 100%;
-      box-sizing: border-box;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
-    textarea {
-      margin: 0.5rem 0 1rem;
-      min-height: 8rem;
-      padding: 0.75rem;
-      font: inherit;
-    }
+<style>
+:root {
+  --bg: #eae3d7;
+  --paper: #f4efe7;
+  --ink: #292820;
+  --muted: #777166;
+  --line: #d4cbbd;
+  --accent: #a36f4d;
+}
 
-    button {
-      padding: 0.75rem;
-      font: inherit;
-      cursor: pointer;
-    }
-  </style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* NAVIGATION */
+
+header {
+  padding: 24px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 27px;
+  letter-spacing: 2px;
+}
+
+nav {
+  display: flex;
+  gap: 32px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+nav a:hover { color: var(--accent); }
+
+.menu-label {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+
+/* HERO */
+
+.hero {
+  padding: 90px 6% 70px;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 35px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(65px, 11vw, 145px);
+  font-weight: 400;
+  line-height: .95;
+  letter-spacing: -5px;
+}
+
+.hero h1 em {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.hero-note {
+  max-width: 220px;
+  font-size: 12px;
+  color: var(--muted);
+  padding-bottom: 10px;
+}
+
+.hero-image {
+  height: min(68vw, 680px);
+  min-height: 350px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-image img {
+  height: 100%;
+  filter: saturate(.72);
+  transition: transform 1s ease;
+}
+
+.hero-image:hover img {
+  transform: scale(1.025);
+}
+
+.hero-caption {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 13px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* INTRO */
+
+.intro {
+  padding: 100px 12%;
+  text-align: center;
+}
+
+.intro-label,
+.section-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.intro h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 4.5vw, 56px);
+  font-weight: 400;
+  line-height: 1.3;
+  max-width: 850px;
+  margin: 25px auto;
+}
+
+.intro p {
+  max-width: 510px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* GALLERY */
+
+.gallery-section {
+  padding: 70px 6% 110px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 45px;
+}
+
+.section-heading h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: clamp(38px, 5vw, 65px);
+}
+
+.section-heading p {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.masonry {
+  columns: 3;
+  column-gap: 22px;
+}
+
+.photo {
+  break-inside: avoid;
+  margin-bottom: 35px;
+  cursor: pointer;
+}
+
+.photo img {
+  transition: filter .4s ease, transform .6s ease;
+  filter: saturate(.78);
+}
+
+.photo:hover img {
+  filter: saturate(1);
+}
+
+.photo figcaption {
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.photo figcaption span:first-child {
+  color: var(--ink);
+}
+
+/* ABOUT */
+
+.about {
+  background: var(--paper);
+  padding: 110px 10%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  align-items: center;
+}
+
+.about-image img {
+  height: 570px;
+  filter: saturate(.7);
+}
+
+.about-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(45px, 6vw, 75px);
+  font-weight: 400;
+  line-height: 1.05;
+  margin: 25px 0;
+}
+
+.about-content p {
+  font-size: 13px;
+  line-height: 2;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.about-signature {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 24px;
+  margin-top: 35px;
+}
+
+/* CONTACT */
+
+.contact {
+  padding: 110px 6%;
+  text-align: center;
+}
+
+.contact h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 8vw, 100px);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 25px 0;
+}
+
+.contact h2 em {
+  color: var(--accent);
+}
+
+.contact p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 35px;
+}
+
+.contact-button {
+  display: inline-block;
+  border: 1px solid var(--ink);
+  padding: 15px 38px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: .3s;
+}
+
+.contact-button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* FOOTER */
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 25px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.socials {
+  display: flex;
+  gap: 22px;
+}
+
+.socials a:hover { color: var(--accent); }
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+  .masonry { columns: 2; }
+  .about { gap: 35px; }
+  .about-image img { height: 450px; }
+}
+
+@media (max-width: 600px) {
+  header { padding: 20px 5%; }
+  nav { gap: 13px; font-size: 9px; }
+  .menu-label { display: none; }
+
+  .hero { padding: 65px 5% 45px; }
+  .hero-top {
+    display: block;
+  }
+  .hero h1 {
+    font-size: 75px;
+    letter-spacing: -3px;
+  }
+  .hero-note {
+    margin-top: 20px;
+  }
+  .hero-image {
+    min-height: 420px;
+    height: 115vw;
+  }
+
+  .intro { padding: 75px 7%; }
+
+  .gallery-section { padding: 55px 5% 70px; }
+  .masonry {
+    columns: 1;
+  }
+  .section-heading {
+    display: block;
+  }
+  .section-heading p { margin-top: 10px; }
+
+  .about {
+    grid-template-columns: 1fr;
+    padding: 75px 7%;
+  }
+  .about-image img { height: 430px; }
+
+  .contact { padding: 80px 5%; }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+</style>
 </head>
+
 <body>
-  <h1>I'd love your fucking feedback</h1>
-  <form id="feedback-form">
-    <label for="feedback">Tell me more</label>
-    <textarea id="feedback" name="feedback" required placeholder="Tell us what you think..."></textarea>
-    <button type="submit">Send</button>
-  </form>
 
-  <script>
-    // Replace this with the email address that should receive feedback.
-    const feedbackEmail = "feedback@example.com";
+<!-- NAVIGATION -->
+<header>
+  <a href="#" class="logo">ELYAS.</a>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <span class="menu-label">Photographer / 2026</span>
+</header>
 
-    document.getElementById("feedback-form").addEventListener("submit", (event) => {
-      event.preventDefault();
-      const message = document.getElementById("feedback").value.trim();
-      if (!message) return;
+<!-- HERO -->
+<main>
+<section class="hero">
+  <div class="hero-top">
+    <h1>Stories<br>in <em>Motion.</em></h1>
+    <p class="hero-note">
+      Street photography, human stories and fragments of everyday life.
+      Capturing the extraordinary in the ordinary.
+    </p>
+  </div>
 
-      const subject = encodeURIComponent("Website feedback");
-      const body = encodeURIComponent(message);
-      window.location.href = `mailto:${feedbackEmail}?subject=${subject}&body=${body}`;
-    });
-  </script>
+  <div class="hero-image">
+    <img
+      src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2000&q=85"
+      alt="Atmospheric urban city scene">
+  </div>
+
+  <div class="hero-caption">
+    <span>Selected moments / 2024–2026</span>
+    <span>01 — Introduction</span>
+  </div>
+</section>
+
+<!-- INTRODUCTION -->
+<section class="intro">
+  <span class="intro-label">The philosophy</span>
+  <h2>
+    "Every street has a story.
+    Every face carries a universe."
+  </h2>
+  <p>
+    I photograph the fleeting moments that often go unnoticed.
+    Light, shadows, people and places — a visual diary of life
+    as it happens.
+  </p>
+</section>
+
+<!-- SELECTED WORKS -->
+<section class="gallery-section" id="work">
+  <div class="section-heading">
+    <div>
+      <span class="section-label">Portfolio / 001</span>
+      <h2>Selected Works</h2>
+    </div>
+    <p>A collection of moments and memories.</p>
+  </div>
+
+  <div class="masonry">
+
+    <figure class="photo">
+      <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=900&q=85"
+      alt="Urban city skyline" loading="lazy">
+      <figcaption><span>Urban solitude</span><span>01 / 06</span></figcaption>
+    </figure>
+
+    <figure class="photo">
+      <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=900&q=85"
+      alt="Street and architecture" loading="lazy">
+      <figcaption><span>City rhythms</span><span>02 / 06</span></figcaption>
+    </figure>
+
+    <figure class="photo">
+      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=900&q=85"
+      alt="City architecture" loading="lazy">
+      <figcaption><span>Concrete stories</span><span>03 / 06</span></figcaption>
+    </figure>
+
+    <figure class="photo">
+      <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=900&q=85"
+      alt="Architectural composition" loading="lazy">
+      <figcaption><span>Geometry of life</span><span>04 / 06</span></figcaption>
+    </figure>
+
+    <figure class="photo">
+      <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=85"
+      alt="City atmosphere" loading="lazy">
+      <figcaption><span>After hours</span><span>05 / 06</span></figcaption>
+    </figure>
+
+    <figure class="photo">
+      <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=900&q=85"
+      alt="Urban landscape" loading="lazy">
+      <figcaption><span>Between places</span><span>06 / 06</span></figcaption>
+    </figure>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image">
+    <img
+      src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=85"
+      alt="Atmospheric documentary photography">
+  </div>
+
+  <div class="about-content">
+    <span class="section-label">A little about me</span>
+    <h2>Looking<br>beyond the<br><em>obvious.</em></h2>
+
+    <p>
+      My name is Elyas. I am a photographer fascinated by
+      the human experience and the visual language of cities.
+    </p>
+
+    <p>
+      Through street and documentary photography, I explore
+      everyday encounters, urban environments and the
+      unexpected beauty of ordinary life.
+    </p>
+
+    <p>
+      My approach is simple: observe, wait, and capture
+      the moment before it disappears.
+    </p>
+
+    <div class="about-signature">Elyas.</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <span class="section-label">Let's connect</span>
+  <h2>Have a story<br>to <em>tell?</em></h2>
+  <p>For collaborations, projects, prints and enquiries.</p>
+
+  <a href="mailto:hello@example.com" class="contact-button">
+    Get in touch ↗
+  </a>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 ELYAS PHOTOGRAPHY</span>
+
+  <div class="socials">
+    <a href="https://instagram.com/" target="_blank">INSTAGRAM</a>
+    <a href="mailto:hello@example.com">EMAIL</a>
+  </div>
+
+  <span>MADE WITH AN EYE FOR DETAIL.</span>
+</footer>
+
 </body>
 </html>
